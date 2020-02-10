@@ -8,14 +8,14 @@ class GamesController < ApplicationController
   end
 
   def score
-    @start_time = params["time"]
+    @start_time = Time.parse(params["time"])
     @end_time = Time.now
     @grid_letters = params["letters"]
     @guessed_word = params["word"]
     @parsed_word = parse(@guessed_word)
     @english = english_word?(@parsed_word)
     @include = included?(@guessed_word.downcase, @grid_letters.downcase)
-    # @time_used = score(@start_time, @end_time)
+    @points = score_calc(@guessed_word, @start_time, @end_time)
   end
 
   def parse(word)
@@ -32,10 +32,9 @@ class GamesController < ApplicationController
     word["found"] ? true : false
   end
 
-  # def score(start_time, end_time)
-  #   end_time - start_time
-  # end
+  def score_calc(word, time_start, time_end)
+    @total_time = time_end - time_start
+    @score = (word.length * 10) - @total_time
+    @score.round
+  end
 end
-
-
-# parsed_word {"found"=>false, "word"=>"sor", "error"=>"word not found"}
