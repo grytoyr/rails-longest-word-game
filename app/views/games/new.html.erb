@@ -1,0 +1,19 @@
+<div class="page-wrap">
+
+  <h1>New Game</h1>
+
+  <div class="grid-wrap">
+    <% @letters.each do |letter| %>
+      <div class="letter"><%= letter %></div>
+    <% end %>
+  </div>
+
+  <form action="/score" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :letters, @letters %>
+    <%= hidden_field_tag :time, @time %>
+    <input type="text" name="word" id="user-word" placeholder="Give it your best shot!">
+    <input type="submit" id="submit-button" value="Play">
+  </form>
+
+</div>

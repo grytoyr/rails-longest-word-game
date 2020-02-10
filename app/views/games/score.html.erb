@@ -1,0 +1,16 @@
+<div class="page-wrap">
+
+  <h1>Result</h1>
+
+  <div class="grid-wrap">
+    <% if @include == false  %>
+      <p>Sorry, but <strong><%= @guessed_word.upcase %></strong> can't be build out of @grid_letters</p>
+    <% elsif @english == false  %>
+      <p>Sorry, but <strong><%= @guessed_word.upcase %></strong> does not seem to be a valid English word...</p>
+    <% else @english == false  %>
+      <p><strong>Congratulations!</strong> <%= @guessed_word.upcase %> is a valid English word!</p>
+    <% end %>
+  </div>
+
+  <div class="play-button"><%= link_to "Play again", new_path %></div>
+</div>
